@@ -1,0 +1,234 @@
+<?
+    // Set page title.
+    $this->headTitle($this->translate('Statistics'));
+    
+    $this->headLink()->appendStylesheet('vendor/morris.css');
+    $this->headLink()->appendStylesheet('vendor/dataTables.bootstrap.css');
+    $this->headLink()->appendStylesheet('vendor/font-awesome.min.css');
+    $this->headLink()->appendStylesheet('vendor/nv.d3.min.css');
+    $this->headLink()->appendStylesheet('bullet.css');
+    
+    
+    
+
+    $this->headScript()->appendFile('vendor/morris/raphael.min.js');
+    $this->headScript()->appendFile('vendor/morris/morris.min.js');
+    $this->headScript()->appendFile('vendor/d3.min.js');
+    $this->headScript()->appendFile('vendor/nv.d3.min.js');
+
+    $this->headScript()->appendFile('vendor/dataTables/jquery.dataTables.js');
+    $this->headScript()->appendFile('vendor/dataTables/dataTables.bootstrap.js');    
+?>
+
+
+<div class="<?=$this->layoutClass('mainbody')?>">
+
+	<div class="row">
+		<br />
+	</div>
+	
+	<h2>
+		<?=$this->transEsc('Last successful harvesting results')?>
+	</h2>
+
+	
+	<div class="row">
+		<br />
+	</div>
+
+	<div class="row">
+	
+	    <? $data = $this->data; ?>
+		
+	
+		<div class="col-lg-3 col-md-6">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-3">
+							<i class="fa fa-globe fa-3x"></i>
+						</div>
+						<div class="col-xs-9 text-right">
+							<div class="medium"><?=count($data["networks"])?></div>
+							<div  class="small-title"><?=$this->transEsc('Harvested networks')?></div>
+						</div>
+					</div>
+				</div>
+				<a href="#">
+					<div class="panel-footer">
+						<span class="pull-left"><?=$this->transEsc('About')?>...</span> <span
+							class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+						<div class="clearfix"></div>
+					</div>
+				</a>
+			</div>
+		</div>
+	
+		<div class="col-lg-3 col-md-6">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-3">
+							<i class="fa fa-download fa-3x"></i>
+						</div>
+						<div class="col-xs-9 text-right">
+							<div class="medium"><?=number_format($data["total"]["size"],0, '', ' ');?></div>
+							<div  class="small-title"><?=$this->transEsc('Harvested records')?></div>
+						</div>
+					</div>
+				</div>
+				<a href="#">
+					<div class="panel-footer">
+						<span class="pull-left"><?=$this->transEsc('About')?>...</span> <span
+							class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+						<div class="clearfix"></div>
+					</div>
+				</a>
+			</div>
+		</div>
+		
+		<div class="col-lg-3 col-md-6">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-3">
+							<i class="fa fa-check fa-3x"></i>
+						</div>
+						<div class="col-xs-9 text-right">
+							<div class="medium"><?=number_format($data["total"]["validSize"],0, '', ' ');?></div>
+							<div  class="small-title"><?=$this->transEsc('Valid records')?></div>
+						</div>
+					</div>
+				</div>
+				<a href="#">
+					<div class="panel-footer">
+						<span class="pull-left"><?=$this->transEsc('About')?>...</span> <span
+							class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+						<div class="clearfix"></div>
+					</div>
+				</a>
+			</div>
+		</div>
+		
+		<div class="col-lg-3 col-md-6">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-3">
+							<i class="fa fa-cogs fa-3x"></i>
+						</div>
+						<div class="col-xs-9 text-right">
+							<div class="medium"><?=number_format($data["total"]["transformedSize"],0, '', ' ');?></div>
+							<div class="small-title"><?=$this->transEsc('Transformed records')?></div>
+						</div>
+					</div>
+				</div>
+				<a href="#">
+					<div class="panel-footer">
+						<span class="pull-left"><?=$this->transEsc('About')?>...</span> <span
+							class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+						<div class="clearfix"></div>
+					</div>
+				</a>
+			</div>
+		</div>
+
+	</div>
+	<!-- /.panel-heading -->
+
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<i class="fa fa-bar-chart-o fa-fw"></i><?=$this->transEsc('Harvested networks')?>
+					</h3>
+				</div>
+				<!-- /.panel-heading -->
+				<div class="panel-body">
+
+					<div class="row">
+						<br />
+					</div>
+
+					<? $dataByNetwork = $this->data; ?>
+					<? foreach ( $dataByNetwork["networks"] as $data): ?>
+					<div id="a<?=$data["acronym"]?>-bullet-chart">
+						<svg></svg>
+					</div>
+					<? endforeach; ?>
+
+					<div class="row">
+						<br />
+					</div>
+					
+
+				</div>
+				<!-- /.panel-body -->
+			</div>
+			<!-- /.panel -->
+		</div>
+		<!-- /.col-lg-8 -->
+		</div>
+		<!-- /.row -->
+		
+		<div class="row">
+			<div class="col-lg-12">
+		
+		
+				<div class="well">
+								<h4><?=$this->transEsc('About harvesting statistics')?></h4>
+								<p>
+									<?=$this->transEsc('about_harvesting_statistics_text')?>
+								</p>
+				</div>
+			
+			</div>
+			
+		</div>
+		<!-- /.row -->
+		
+
+
+</div>
+
+<script type="text/javascript">
+
+<? $dataByNetwork = $this->data; ?>
+<? foreach ( $dataByNetwork["networks"] as $data): ?>	
+
+
+
+var a<?=$data["acronym"]?>data = {
+	  	"title":"<?=$data["name"]?>",		//Label the bullet chart
+	  	"subtitle":"<?=substr($data["datestamp"],0,11)?>",		//sub-label for bullet chart
+	  	"ranges":[<?=$data["transformedSize"]?>,<?=$data["validSize"]?>,<?=$data["size"]?>],	 //Minimum, mean and maximum values.
+	  	"measures":[<?=$data["validSize"]?>],		 //Value representing current measurement (the thick blue line in the example)
+	  	"markers":[<?=$data["transformedSize"]?>],			 //Place a marker on the chart (the white triangle marker)
+	    "rangeLabels":["<?=$this->transEsc('Harvested')?>","<?=$this->transEsc('Valid')?>","<?=$this->transEsc('Transformed')?>"], 
+	    "measureLabels":["<?=$this->transEsc('Valid')?>"],
+	    "markerLabels":["<?=$this->transEsc('Transformed')?>"] 
+	  };
+
+nv.addGraph(function() {  
+	
+  var chart = nv.models.bulletChart();
+
+  d3.select('#a<?=$data["acronym"]?>-bullet-chart svg')
+      .datum(a<?=$data["acronym"]?>data)
+      .transition().duration(1000)
+      .call(chart);
+
+  nv.utils.windowResize(function() { chart.update() });
+  
+  return chart;
+});
+
+<? endforeach; ?>
+</script>
+
+
+<div class="<?=$this->layoutClass('sidebar')?>">
+	<?=$this->render("lareferencia/menu.phtml")?>
+</div>

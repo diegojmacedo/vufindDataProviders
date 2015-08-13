@@ -1,0 +1,34 @@
+<?
+    // Set page title.
+    $this->headTitle($this->translate('Contents'));
+?>
+<style>
+	#static-content li {
+		margin-bottom: 10px;
+	
+	}
+</style>
+
+<div id="static-content" class="<?=$this->layoutClass('mainbody')?>">
+
+   <?//=$this->render("home/contents/". $this->section . "_" . $this->layout()->userLang. ".phtml")?>
+      
+<?=$this->flashmessages()?>
+
+<h2>Lista de Data Providers Cadastrados</h2>
+
+<h4>Bem vindo <?=$this->escapeHtmlAttr($this->username)?>, aqui você pode gerenciar os seus dataproviders</h4>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <p>
+     <a href="<?php echo $this->url('dataProviders', array('action'=>'add'));?>">Add new data Provider</a>
+ </p>
+
+
+</div>
+
+<script type="text/javascript">
+
+</script>
+
+
+

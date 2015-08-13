@@ -1,0 +1,157 @@
+<?
+    // Set page title.
+    $this->headTitle($this->translate('Statistics'));
+    
+    $this->headLink()->appendStylesheet('vendor/morris.css');
+    $this->headLink()->appendStylesheet('vendor/dataTables.bootstrap.css');
+    $this->headLink()->appendStylesheet('vendor/font-awesome.min.css');
+    
+    $this->headScript()->appendFile('vendor/morris/raphael.min.js');
+    $this->headScript()->appendFile('vendor/morris/morris.min.js');
+
+    $this->headScript()->appendFile('vendor/dataTables/jquery.dataTables.js');
+    $this->headScript()->appendFile('vendor/dataTables/dataTables.bootstrap.js');    
+?>
+
+
+<div class="<?=$this->layoutClass('mainbody')?>">
+
+	<div class="row">
+		<br />
+	</div>
+	
+	
+	<h2>
+		<?=$this->transEsc('Harvesting history')?>
+	</h2>
+
+	<div class="row">
+		<br />
+	</div>
+
+
+	<? $dataByNetwork = $this->data; ?>
+	<? foreach ( $dataByNetwork as $data): ?>
+
+	<div class="row">
+		<div class="col-lg-12">	
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<i class="fa fa-bar-chart-o fa-fw"></i><?=$data["name"]?>
+					</h3>
+				</div>
+				<!-- /.panel-heading -->
+				<div class="panel-body" >	
+					<div style="height: 200px;" id="c<?=$data["acronym"]?>-history-chart"></div>
+				</div>
+				<!-- /.panel-body -->
+			</div>
+			<!-- /.panel -->			
+		</div>
+		<!-- /.col-lg-8 -->
+		</div>
+		<!-- /.row -->
+		<? endforeach; ?>
+		
+		
+		<div class="row">
+			<div class="col-lg-12">
+		
+		
+				<div class="well">
+								<h4><?=$this->transEsc('About harvesting statistics')?></h4>
+								<p>
+									<?=$this->transEsc('about_harvesting_statistics_text')?>
+								</p>
+				</div>
+			
+			</div>
+			
+		</div>
+		<!-- /.row -->
+		
+
+
+</div>
+
+<script type="text/javascript">
+<? $dataByNetwork = $this->data; ?>
+<? foreach ( $dataByNetwork as $data): ?>	
+
+var <?="c".$data["acronym"]?>data = <?=json_encode($data["validSnapshots"]) ?>;  
+
+
+Morris.Line({
+    element: '<?="c".$data["acronym"]?>-history-chart',
+    data: <?="c".$data["acronym"]?>data,
+    xkey: 'endTime', 
+    ykeys: ['size', 'validSize','transformedSize' ],
+    labels: ["<?=$this->transEsc('Harvested')?>","<?=$this->transEsc('Valid')?>","<?=$this->transEsc('Transformed')?>"],
+    pointSize: 2,
+    smoth: 'false',
+    hideHover: true,
+    resize: true, 
+    yLabelFormat: function (y) { return y.toString() + ''; }
+});	  
+
+<? endforeach; ?>
+
+
+
+
+</script>
+
+<!-- script type="text/javascript">
+
+var rawJson =  <?=json_encode($this->data) ?>;
+var data = rawJson.networks;
+
+var historyJSON =  <?=json_encode($this->harvestingHistory) ?>;
+
+
+Morris.Bar({
+	  element: 'networks-bar-chart',
+	  data: data,
+	  xkey: 'name',
+	  ykeys: ['size', 'validSize', 'transformedSize'],
+	  labels: ['Total cosechado', 'Válidos', 'Transformados'],
+	  stacked: true
+	});
+
+
+Morris.Line({
+    element: 'history-line-chart',
+    data: historyJSON,
+    xkey: 'datestamp', 
+    ykeys: ['size', 'validSize','transformedSize', ],
+    labels: ['Size','Valid','Transformed'],
+    xLabels: 'day',
+    pointSize: 2,
+    smoth: 'false',
+    hideHover: false,
+    resize: true
+});
+
+
+var columns = [];
+columns.push({ 'data':'timestamp', 'title':'Período' });
+
+$.each( sources, function( key, value ) {
+        columns.push( {'data':key, 'title':key} );
+}); 
+
+$('#clicks-datatable').dataTable( {
+    data: data,
+    columns: columns,
+    bFilter: false, 
+    bInfo: false,
+    bPaginate: false
+} );   
+
+</script-->
+
+
+<div class="<?=$this->layoutClass('sidebar')?>">
+	<?=$this->render("lareferencia/menu.phtml")?>
+</div>

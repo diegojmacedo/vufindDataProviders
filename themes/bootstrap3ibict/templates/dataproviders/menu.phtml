@@ -1,0 +1,29 @@
+
+<div class="row"><br/></div>
+
+
+<ul class="list-group">
+
+<li class="list-group-item title" href="#"><?=$this->transEsc('Field statistics')?></li>
+
+  <a href="<?=$this->url('home')?>Statistics/Count?field=format" class="list-group-item<?=strtolower($this->field) == "format" ? ' active' : ''?>"><?=$this->transEsc('format_fieldname')?></a>
+  <a href="<?=$this->url('home')?>Statistics/Count?field=language" class="list-group-item<?=strtolower($this->field) == "language" ? ' active' : ''?>"><?=$this->transEsc('language_fieldname')?></a>
+  <a href="<?=$this->url('home')?>Statistics/Count?field=eu_rights" class="list-group-item<?=strtolower($this->field) == "eu_rights" ? ' active' : ''?>"><?=$this->transEsc('eu_rights_fieldname')?></a>
+  <a href="<?=$this->url('home')?>Statistics/Count?field=publishDate&limit=20" class="list-group-item<?=strtolower($this->field) == "publishDate" ? ' active' : ''?>"><?=$this->transEsc('publishDate_fieldname')?> (top 20)</a>
+  
+</ul>
+
+<!--  ul class="list-group">
+  <li class="list-group-item title" href="#"><?=$this->transEsc('Access statistics')?></li>
+  <a href="#" <?=$this->url('home')?>Statistics/Clicks" class="list-group-item<?=strtolower($this->layout()->templateName) == "clicks" ? ' active' : ''?>"><?=$this->transEsc('Record access by network')?></a>
+</ul-->
+
+<ul class="list-group">
+  <li class="list-group-item title" href="#"><?=$this->transEsc('Harvesting statistics')?></li>
+  <a href="<?=$this->url('home')?>Statistics/Networks" class="list-group-item<?=strtolower($this->layout()->templateName) == "networks" ? ' active' : ''?>"><?=$this->transEsc('Last successful harvesting results')?></a>
+  <a href="<?=$this->url('home')?>Statistics/History" class="list-group-item<?=strtolower($this->layout()->templateName) == "history" ? ' active' : ''?>"><?=$this->transEsc('Harvesting history')?></a>
+  
+</ul>
+
+
+

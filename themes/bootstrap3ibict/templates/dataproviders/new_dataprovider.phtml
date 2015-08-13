@@ -1,0 +1,327 @@
+<?
+    // Set page title.
+    $this->headTitle($this->translate('Contents'));
+?>
+
+<style>
+
+	#static-content li {
+		margin-bottom: 10px;
+	
+	}
+
+
+</style>
+
+<div id="static-content" class="<?=$this->layoutClass('mainbody')?>">
+
+   <?//=$this->render("home/contents/". $this->section . "_" . $this->layout()->userLang. ".phtml")?>
+      
+<?=$this->flashmessages()?>
+
+<h2>Cadastro de Revista no Diretório Seer</h2>
+
+<form class="form-horizontal" action="dataProviders/add" method="post">
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="dbname">Título:</label>
+    <div class="col-sm-9">
+      <input type="text" name="titulo" class="form-control"/>
+    </div>
+  </div>
+    <div class="form-group">
+    <label class="col-sm-3 control-label" for="dbname">Título Abreviado:</label>
+    <div class="col-sm-9">
+      <input type="text" name="tituloAbreviado" class="form-control"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="dbname">Url da revista:</label>
+    <div class="col-sm-9">
+      <input type="text" name="url" id="urlRevista" class="form-control"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="dbname">URL OAI-PMH da revista:</label>
+    <div class="col-sm-9">
+      <input type="text" name="urlOAI" class="form-control"/>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="instituicao">Instituição:</label>
+    <div class="col-sm-9">
+      <select name="instituicao" class="form-control">
+        <option value="UNB">UNB</option>
+        <option value="UCB">UCB</option>
+		<option value="UFMG">UFMG</option>
+		<option value="UFG">UFG</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="endereco">CEP:</label>
+    <div class="col-sm-9">
+      <input type="text" name="cep" id="cep" class="form-control"/>
+	      <input type="button" id="buttoncep" class="form-control" value="Pesquisar Cep"/>
+	 </div>
+  </div>
+  <!--
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="endereco">Endereço da Instituição:</label>
+    <div class="col-sm-9">
+      <input type="text" name="endereco" id="endereco" class="form-control"/>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="bairro">Bairro:</label>
+    <div class="col-sm-9">
+      <input type="text" name="bairro" id="bairro" class="form-control"/>
+    </div>
+  </div>
+  -->
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="cidade">Cidade:</label>
+    <div class="col-sm-9">
+      <input type="text" name="cidade" id="cidade" class="form-control"/>
+    </div>
+  </div>
+  
+   <div class="form-group">
+    <label class="col-sm-3 control-label" for="uf">UF:</label>
+    <div class="col-sm-9">
+      <select name="uf" class="form-control" id="select_uf">
+        <option value="AC">AC</option>
+        <option value="AL">AL</option>
+		<option value="AP">AP</option>
+		<option value="AM">AM</option>
+        <option value="BA">BA</option>
+        <option value="CE">CE</option>
+		<option value="DF">DF</option>
+		<option value="ES">ES</option>
+        <option value="GO">GO</option>
+        <option value="MT">MT</option>
+		<option value="MS">MS</option>
+		<option value="MG">MG</option>
+        <option value="PR">PR</option>
+        <option value="PB">PB</option>
+		<option value="PA">PA</option>
+		<option value="PE">PE</option>
+        <option value="PI">PI</option>
+        <option value="RJ">RJ</option>
+		<option value="RN">RN</option>
+		<option value="RS">RS</option>		
+        <option value="RO">RO</option>
+        <option value="RR">RR</option>
+		<option value="SC">SC</option>
+		<option value="SE">SE</option>	
+		<option value="SP">SP</option>	
+		<option value="TO">TO</option>			
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="telefone">Telefone:</label>
+    <div class="col-sm-9">
+      <input type="text" name="telefone" class="form-control"/>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="emailrevista">E-mail da revista:</label>
+    <div class="col-sm-9">
+      <input type="text" name="emailRevista" class="form-control"/>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="editorgerente">Editor Gerente:</label>
+    <div class="col-sm-9">
+      <input type="text" name="editorGerente" class="form-control"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="areacnpq">Área Cnpq:</label>
+    <div class="col-sm-9">
+	  <select name="areaCnpq"  id="areaCnpq" class="form-control">
+		<option value="Selecione">Selecione</option>
+	  </select>
+    </div>
+  </div>
+  
+   <div class="form-group">
+    <label class="col-sm-3 control-label" for="anoinicio">Ano Início do Periódico:</label>
+    <div class="col-sm-9">
+      <input type="text" name="anoInicio" class="form-control" maxlength="4" />
+    </div>
+  </div> 
+ 
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="periodicidade">Periodicidade:</label>
+	<div class="col-sm-9">
+      <select name="periodicidade" class="form-control">
+        <option value="Bimestral">Bimestral</option>
+        <option value="Trimestral">Trimestral</option>
+		<option value="Quadrimestral">Quadrimestral</option>
+		<option value="Anual">Anual</option>	
+      </select>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="anoInicioSeer">Ano Início do Periódico no SEER:</label>
+    <div class="col-sm-9">
+      <input type="text" name="anoInicioSeer" class="form-control"/>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="issn">ISSN:</label>
+    <div class="col-sm-9">
+      <input type="text" name="issn" class="form-control"/>
+    </div>
+  </div>  
+	
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="doi">Digital Object Identifier - DOI:</label>
+    <div class="col-sm-9">
+      <input type="text" name="doi" class="form-control"/>
+    </div>
+  </div>  
+    
+  <div class="form-group" id="div_indexadobasedados">
+    <label class="col-sm-3 control-label" for="indexadoBaseDados">Indexado em Base de Dados:</label>
+	<div class="col-sm-9">
+      <select name="indexadoBaseDados" class="form-control" id="select_indexadobasedados">
+        <option value="Nao">Não</option>
+		<option value="Sim">Sim</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="form-group" id="div_indexadobasedadosquais">
+    <label class="col-sm-3 control-label" for="indexadoBaseDadosQuais">Qual(is)?:</label>
+	<div class="col-sm-9">	  
+		<input type="checkbox" id="selectAll">Selecionar Todos<br />
+		<table style="width:100%">
+		  <tr>
+			<td><input type="checkbox" name="item[]" value="CAS" class="chkbox">CAS</td>
+			<td><input type="checkbox" name="item[]" value="Clase/Periodica" class="chkbox">Clase/Periodica</td>		
+			<td><input type="checkbox" name="item[]" value="DOAJ" class="chkbox">DOAJ</td>
+		  </tr>
+		  <tr>
+			<td><input type="checkbox" name="item[]" value="EBSCO" class="chkbox">EBSCO</td>
+			<td><input type="checkbox" name="item[]" value="EZB" class="chkbox">EZB</td>
+			<td><input type="checkbox" name="item[]" value="Google Scholar" class="chkbox">Google Scholar</td>
+		  </tr>
+		  <tr>
+			<td><input type="checkbox" name="item[]" value="ISI" class="chkbox">ISI</td>
+			<td><input type="checkbox" name="item[]" value="J-gate" class="chkbox">J-gate</td>		
+			<td><input type="checkbox" name="item[]" value="Latindex" class="chkbox">LatIndex</td>
+		  </tr>
+		  <tr>
+			<td><input type="checkbox" name="item[]" value="Qualis" class="chkbox">Qualis</td>
+			<td><input type="checkbox" name="item[]" value="capes" class="chkbox">Periódicos Capes</td>		
+			<td><input type="checkbox" name="item[]" value="Redalyc" class="chkbox">Redalyc</td>
+		  </tr>
+		  <tr>
+			<td><input type="checkbox" name="item[]" value="Scopus" class="chkbox">Scorpus</td>
+			<td><input type="checkbox" name="item[]" value="socol@r" class="chkbox">socol@r</td>		
+			<td><input type="checkbox" name="item[]" value="SSCI" class="chkbox">SSCI</td>
+		  </tr>
+		  <tr>
+			<td><input type="checkbox" name="item[]" value="sumarios.org" class="chkbox">sumarios.org</td>
+			<td><input type="checkbox" name="item[]" value="ulrishsweb" class="chkbox">ulrishsweb</td>		
+			<td><input type="checkbox" name="item[]" value="Outros" class="chkbox">Outros</td>
+		  </tr>
+		</table>
+	
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="doi">Versão:</label>
+    <div class="col-sm-9">
+      <input type="text" name="versao" id="versao" class="form-control"/>
+    </div>
+  </div>  
+  
+  
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="doi">Informações adicionais:</label>
+    <div class="col-sm-9">
+	  <textarea rows="6" cols="55" name="infoAdicionais" class="form-control"></textarea>
+    </div>
+  </div>  
+  
+  <div class="form-group">
+    <div class="col-sm-9 col-sm-offset-3">
+      <input class="btn btn-primary" type="submit" name="submit" value="<?=$this->transEsc('Submit') ?>" />
+    </div>
+  </div>
+  
+</form>
+             
+<!-- /.main -->     
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+	var valueSelected = $("#select_indexadobasedados option:selected").val();
+	if (valueSelected=="Sim"){
+		$("#div_indexadobasedadosquais").show();
+	}else{
+		$("#div_indexadobasedadosquais").hide();
+	}
+
+	$("#select_indexadobasedados").change(function(){
+		var optionSelected = $("option:selected", this);
+		var valueSelected = this.value;
+		
+		if (valueSelected=="Sim"){
+			$('#div_indexadobasedadosquais').show();
+		}else{
+			$('#div_indexadobasedadosquais').hide();
+		}
+	});
+	
+	$("#buttoncep").click(function(){
+		var cep = $("#cep").val();
+		var url="http://api.postmon.com.br/v1/cep/"+cep;
+		$.getJSON(url, function( data ) {
+			$.each(data, function(key, valor) {
+				if(key=="logradouro"){
+					$("#endereco").val(valor);
+				}else if(key=="bairro"){
+					$("#bairro").val(valor);
+				}else if(key=="cidade"){
+					$("#cidade").val(valor);				
+				}else if(key=="estado"){
+					$("#select_uf option").each(function() {
+						this.selected=(this.value == valor);
+
+					});
+				}
+			});
+		});
+	});
+
+	$('#selectAll').on('click',function(){
+		if ($(this).is(':checked')) {
+			$('.chkbox').each(function(){
+				this.checked = true;
+			});
+		}else{
+			$('.chkbox').each(function(){
+				this.checked = false;
+			});
+		}
+	})
+
+});
+
+</script>

@@ -1,0 +1,27 @@
+
+<div class="row"><br/></div>
+
+
+<ul class="list-group">
+
+  	<li class="list-group-item title" href="#"><?=$this->transEsc('Metadata Statistics by Network')?></li>
+
+	<? $networks = $this->networks; ?>
+	<? foreach ( $networks as $network): ?>	
+
+  		<a href="<?=$this->url('home')?>Statistics/Diagnose?acronym=<?=$network['acronym']?>" class="list-group-item<?=$this->networkAcronym == $network['acronym'] ? ' active' : ''?>"><?=$network['name']?></a>
+  
+    <? endforeach; ?>
+  
+</ul>
+
+
+<!--  >ul class="list-group">
+  <li class="list-group-item title" href="#"><?=$this->transEsc('Harvesting statistics')?></li>
+  <a href="<?=$this->url('home')?>Statistics/Networks" class="list-group-item<?=strtolower($this->layout()->templateName) == "networks" ? ' active' : ''?>"><?=$this->transEsc('Last successful harvesting results')?></a>
+  <a href="<?=$this->url('home')?>Statistics/History" class="list-group-item<?=strtolower($this->layout()->templateName) == "history" ? ' active' : ''?>"><?=$this->transEsc('Harvesting history')?></a>
+  
+</ul-->
+
+
+
