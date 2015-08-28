@@ -57,7 +57,9 @@ class DataProvidersController extends \VuFind\Controller\AbstractBase
             $this->setFollowupUrlToReferer();
             return $this->forwardTo('MyResearch', 'Login');
         }
-    	$section = $this->params()->fromQuery('section', 'test');
+        $table = $this->getTable('DataProvider')->select();
+        print_r($table);
+      //	$section = $this->params()->fromQuery('section', 'test');
         $view = $this->createViewModel();
 		$view->setTemplate('dataproviders/my_dataproviders');
 		$user = $this->getUser();
@@ -65,7 +67,7 @@ class DataProvidersController extends \VuFind\Controller\AbstractBase
 
         $config = $this->getConfig();
 
-        $view->section = $section;
+      //  $view->section = $section;
 
         return $view;
     }

@@ -1,31 +1,43 @@
 <?php
 namespace DataProviders\Module\Configuration;
 
-$config = array(
-    'controllers' => array(
-        'invokables' => array(
+$config =[
+    'controllers' => [
+        'invokables' => [
 		'dataProviders' => 'DataProviders\Controller\DataProvidersController',
-        ),
-    ),
-    'router' => array(
-        'routes' => array(
-            'dataProviders' => array(
+        ],
+    ],
+    'vufind' => [
+        // This section contains service manager configurations for all VuFind
+        // pluggable components:
+        'plugin_managers' => [
+            'db_table' => [
+                'invokables' => [
+                    'dataProvider' => 'DataProviders\Db\Table\DataProvider',
+                ],
+            ],
+        ],
+    ],
+
+    'router' => [
+        'routes' => [
+            'dataProviders' => [
                 'type' => 'segment',
-                'options' => array(
+                'options' => [
                     'route' => '/dataProviders[/:action][/:id]',
-                    'constraints' => array(
+                    'constraints' =>[
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id' => '[0-9]+',
-                    ),
-                    'defaults' => array(
+                    ],
+                    'defaults' => [
                         'controller' => 'dataProviders',
                         'action' => 'Home',
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
+                    ],
+                ],
+            ],
+        ],
+    ],
+];
 
 
 
